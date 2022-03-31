@@ -6,7 +6,7 @@ env:
 on: [push, pull_request]
 jobs:
   build-n-publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     name: Build and publish Python distribution
     steps:
       - uses: actions/checkout@v3
