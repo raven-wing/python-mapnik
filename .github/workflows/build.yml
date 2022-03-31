@@ -2,6 +2,7 @@ name: Publish Python distributions to PyPI and TestPyPI
 env:
   BOOST_PYTHON_LIB: boost_python
   BOOST_SYSTEM_LIB: boost_system
+  BOOST_THREAD_LIB: boost_thread
   MASON_BUILD: true
 on: [push, pull_request]
 jobs:
