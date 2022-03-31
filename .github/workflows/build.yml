@@ -13,10 +13,10 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt-get install libboost-python-dev
-      - name: Initialize Python 2.7
+      - name: Initialize Python 3.6
         uses: actions/setup-python@v3
         with:
-          python-version: 2.7
+          python-version: 3.6
       - name: Build binary wheel and a source tarball
         run: |
           pip install wheel
