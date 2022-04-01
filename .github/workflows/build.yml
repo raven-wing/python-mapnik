@@ -26,8 +26,7 @@ jobs:
           submodules: true
       - name: install dependencies
         run: |
-          sudo apt-get install libboost-python-dev python3-cairo-dev python-cairo-dev clang
-      #clang-3.9
+          sudo apt-get install libboost-python-dev python3-cairo-dev python-cairo-dev clang postgress
       - name: Initialize Python {{matrix.python-version}}
         uses: actions/setup-python@v3
         with:
@@ -43,7 +42,7 @@ jobs:
         run: |
           python setup.py install
           source mason-config.env
-          /mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
+          ./mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
           python test/run_tests.py
           python test/visual.py -q
           ./mason_packages/.link/bin/pg_ctl -w stop
