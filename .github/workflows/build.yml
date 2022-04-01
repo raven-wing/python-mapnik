@@ -18,7 +18,7 @@ jobs:
         system:
         #- ubuntu-18.04
         - ubuntu-20.04
-    runs-on: ubuntu-18.04
+    runs-on: ${{matrix.system}}
     name: Build and publish Python distribution
     steps:
       - uses: actions/checkout@v3
