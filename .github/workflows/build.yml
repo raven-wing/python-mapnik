@@ -26,7 +26,7 @@ jobs:
           submodules: true
       - name: install dependencies
         run: |
-          sudo apt-get install libboost-python-dev python-cairo-dev clang
+          sudo apt-get install libboost-python-dev python3-cairo-dev python-cairo-dev clang
       #clang-3.9
       - name: Initialize Python {{matrix.python-version}}
         uses: actions/setup-python@v3
