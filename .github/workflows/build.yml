@@ -41,6 +41,7 @@ jobs:
           path: ./dist/*.whl
       - name: Run tests
         run: |
+          python setup.py install
           source mason-config.env
           /mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
           python test/run_tests.py
