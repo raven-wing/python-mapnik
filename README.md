@@ -1,4 +1,4 @@
-![Build Status](https://github.com/raven-wing/python-mapnik/actions/workflows/build.yml/badge.svg)
+[![Build Status](https://github.com/raven-wing/python-mapnik/actions/workflows/build.yml/badge.svg)](https://github.com/raven-wing/python-mapnik/actions)
 
 Python bindings for Mapnik.
 
