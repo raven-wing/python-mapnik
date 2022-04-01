@@ -2,23 +2,32 @@ name: Publish Python distributions to PyPI and TestPyPI
 env:
   BOOST_PYTHON_LIB: boost_python
   BOOST_SYSTEM_LIB: boost_system
+  BOOST_THREAD_LIB: boost_thread
+  PYCAIRO: true
   MASON_BUILD: true
 on: [push, pull_request]
 jobs:
   build-and-test:
     strategy:
+      fail-fast: false
       matrix:
         python-version:
         - "2.7"
-        - "3.6"
-        - "3.8"
-    runs-on: ubuntu-20.04
+        #- "3.6"
+        #- "3.8"
+        system:
+        #- ubuntu-18.04
+        - ubuntu-20.04
+    runs-on: ${{matrix.system}}
     name: Build and publish Python distribution
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - name: install dependencies
         run: |
-          sudo apt-get install libboost-python-dev
+          sudo apt-get install libboost-python-dev python-cairo-dev clang
+      #clang-3.9
       - name: Initialize Python {{matrix.python-version}}
         uses: actions/setup-python@v3
         with:
