@@ -5,6 +5,11 @@ env:
   BOOST_THREAD_LIB: boost_thread
   PYCAIRO: true
   MASON_BUILD: true
+  CCACHE_TEMPDIR: /tmp/.ccache-temp
+  CCACHE_COMPRESS: 1
+  PYTHONUSERBASE: $(pwd)/mason_packages/.link
+  PYTHONPATH: $(pwd)/mason_packages/.link/lib/python2.7/site-packages
+  PATH: $(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
 on: [push, pull_request]
 jobs:
   build-and-test:
@@ -44,9 +49,13 @@ jobs:
           path: ./dist/*.whl
       - name: Run tests
         run: |
-          python setup.py install
+          mkdir -p ${PYTHONPATH}
+          python setup.py install --prefix ${PYTHONUSERBASE}
+
           source mason-config.env
           ./mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
+          
           python test/run_tests.py
           python test/visual.py -q
-          ./mason_packages/.link/bin/pg_ctl -w stop
+          ./mason_packages/.link/bin/pg_ctl -w stop                    
+
