@@ -9,7 +9,7 @@ env:
   CCACHE_COMPRESS: 1
   PYTHONUSERBASE: $(pwd)/mason_packages/.link
   PYTHONPATH: $(pwd)/mason_packages/.link/lib/python2.7/site-packages
-  PATH: $(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
+  #PATH: $(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
 on: [push, pull_request]
 jobs:
   build-and-test:
