@@ -50,7 +50,9 @@ jobs:
       - name: Run tests
         run: |
           export PATH=$(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
-        
+          
+          source scripts/setup_mason.sh
+          
           mkdir -p ${PYTHONPATH}
           python setup.py install --prefix ${PYTHONUSERBASE}
 
