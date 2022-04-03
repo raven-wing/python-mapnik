@@ -49,6 +49,8 @@ jobs:
           path: ./dist/*.whl
       - name: Run tests
         run: |
+          export PATH=$(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
+        
           mkdir -p ${PYTHONPATH}
           python setup.py install --prefix ${PYTHONUSERBASE}
 
