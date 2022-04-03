@@ -26,7 +26,7 @@ jobs:
     runs-on: ${{matrix.system}}
     name: Build and publish Python distribution
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v1
         with:
           submodules: true
       - name: Git Sumbodule Update
