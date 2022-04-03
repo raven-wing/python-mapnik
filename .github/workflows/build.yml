@@ -43,8 +43,9 @@ jobs:
         run: |
           pip install wheel pycairo nose PyPDF2
           python setup.py sdist bdist_wheel
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
+          name: ${{ matrix.python-version }}_${{matrix.system}}
           path: ./dist/*.whl
       - name: Run tests
         run: |
