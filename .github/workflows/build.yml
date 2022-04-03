@@ -44,19 +44,17 @@ jobs:
           python setup.py sdist bdist_wheel
       - name: Run tests
         run: |
+          source scripts/setup_mason.sh          
           export PATH=$(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
-          
-          source scripts/setup_mason.sh
           
           mkdir -p ${PYTHONPATH}
           python setup.py install --prefix ${PYTHONUSERBASE}
-
+#old_script
           source mason-config.env
           ./mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
-          
           python test/run_tests.py
           python test/visual.py -q
-          ./mason_packages/.link/bin/pg_ctl -w stop                    
+          ./mason_packages/.link/bin/pg_ctl -w stop
       - uses: actions/upload-artifact@v3
         with:
           name: python_{{ matrix.python-version }}-${{matrix.system}}
