@@ -46,10 +46,10 @@ jobs:
         run: |
           source scripts/setup_mason.sh          
           export PATH=$(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
-          
           mkdir -p ${PYTHONPATH}
           python setup.py install --prefix ${PYTHONUSERBASE}
-#old_script
+          
+          
           source mason-config.env
           ./mason_packages/.link/bin/postgres -k ${PGHOST} > postgres.log &
           python test/run_tests.py
