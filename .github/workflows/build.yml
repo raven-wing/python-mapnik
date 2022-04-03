@@ -8,7 +8,6 @@ env:
   CCACHE_COMPRESS: 1
   PYTHONUSERBASE: $(pwd)/mason_packages/.link
   PYTHONPATH: $(pwd)/mason_packages/.link/lib/python2.7/site-packages
-  #PATH: $(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
 on: [push, pull_request]
 jobs:
   build-and-test:
@@ -43,10 +42,6 @@ jobs:
         run: |
           pip install wheel pycairo nose PyPDF2
           python setup.py sdist bdist_wheel
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.python-version }}_${{matrix.system}}
-          path: ./dist/*.whl
       - name: Run tests
         run: |
           export PATH=$(pwd)/mason_packages/.link/bin:${PYTHONUSERBASE}/bin:${PATH}
@@ -62,4 +57,7 @@ jobs:
           python test/run_tests.py
           python test/visual.py -q
           ./mason_packages/.link/bin/pg_ctl -w stop                    
-
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python_{{ matrix.python-version }}-${{matrix.system}}
+          path: ./dist/*.whl
