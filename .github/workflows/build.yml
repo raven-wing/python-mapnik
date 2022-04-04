@@ -37,7 +37,7 @@ jobs:
       - name: Initialize Python {{matrix.python-version}}
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{matrix.python-version}}
       - name: Build binary wheel and a source tarball
         run: |
           pip install wheel pycairo nose PyPDF2
@@ -57,5 +57,5 @@ jobs:
           ./mason_packages/.link/bin/pg_ctl -w stop
       - uses: actions/upload-artifact@v3
         with:
-          name: python_{{ matrix.python-version }}-${{matrix.system}}
+          name: python_${{matrix.python-version}}-${{matrix.system}}
           path: ./dist/*.whl
